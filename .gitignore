@@ -1,0 +1,61 @@
+# ── Qt / C++ ──────────────────────
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.o
+*.obj
+*.qmlc
+*.jsc
+Makefile
+*.Debug
+*.Release
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+
+# ── Build ─────────────────────────
+build/
+build-*/
+out/
+
+# ── Qt Creator ────────────────────
+*.autosave
+*.creator.user
+*.files
+*.includes
+*.config
+CMakeLists.txt.user
+.qtc_clangd/
+
+# ── Android ───────────────────────
+android/build/
+android/.gradle/
+android/local.properties
+android/*.apk
+android/*.aab
+*.apk
+*.aab
+
+# ── IDE ───────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── 敏感配置（绝不提交）────────────
+secrets.json

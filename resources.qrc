@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qml/pages/DashboardPage.qml</file>
+        <file>qml/pages/LoginPage.qml</file>
+        <file>qml/pages/HomePage.qml</file>
+        <file>qml/pages/DrugShelfPage.qml</file>
+        <file>qml/pages/DrugDetailPage.qml</file>
+        <file>qml/pages/CartPage.qml</file>
+        <file>qml/pages/OrderPage.qml</file>
+        <file>qml/pages/ProfilePage.qml</file>
+        <file>qml/pages/PersonalInfoPage.qml</file>
+        <file>qml/pages/HealthMonitorPage.qml</file>
+        <file>qml/pages/HealthNewsPage.qml</file>
+        <file>qml/pages/NewsDetailPage.qml</file>
+        <file>qml/components/DrugCard.qml</file>
+        <file>qml/components/CartItem.qml</file>
+        <file>qml/components/OrderItem.qml</file>
+    </qresource>
+</RCC>

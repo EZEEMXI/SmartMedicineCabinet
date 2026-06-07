@@ -1,0 +1,132 @@
+<svg viewBox="0 0 680 540" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>智能药柜系统架构</title>
+  <desc>OneNet 云平台连接 Qt6 APP 和双 STM32 MCU，主机通过 ESP8266 WiFi 上云，从机通过 UART1 连接主机</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 15px; font-weight: 500; fill: #26215C; }
+    .t { font-size: 14px; font-weight: 500; }
+    .ts { font-size: 12px; font-weight: 400; fill: #5F5E5A; }
+    .tag { font-size: 11px; font-weight: 500; fill: #5F5E5A; }
+    .edge-label { font-size: 11px; font-weight: 500; fill: #5F5E5A; }
+    .sub { fill: #F1EFE8; stroke: #D3D1C7; stroke-width: 0.5; }
+    .arr { fill: none; stroke: #888780; stroke-width: 1.5; marker-end: url(#arrow); }
+    .arr-both { fill: none; stroke: #888780; stroke-width: 1.5; marker-start: url(#arrow); marker-end: url(#arrow); }
+    .conn { fill: none; stroke: #D3D1C7; stroke-width: 0.5; stroke-dasharray: 4 3; }
+  </style>
+
+  <text class="title" x="340" y="28" text-anchor="middle">智能药柜 — 系统架构</text>
+
+  <!-- ═══ OneNet Cloud ═══ -->
+  <g>
+    <rect x="200" y="52" rx="10" width="280" height="50" stroke="#534AB7" stroke-width="0.5" fill="#EEEDFE"/>
+    <text class="t" x="340" y="72" text-anchor="middle" dominant-baseline="central" fill="#26215C">OneNet 云平台</text>
+    <text class="ts" x="340" y="92" text-anchor="middle" dominant-baseline="central">MQTT / 物模型</text>
+  </g>
+
+  <!-- Edges between cloud and devices (MQTT is bidirectional) -->
+  <polyline points="340,102 340,134 115,134 115,168" class="arr-both"/>
+  <line x1="340" y1="102" x2="340" y2="168" class="arr-both"/>
+  <text class="edge-label" x="200" y="130" text-anchor="middle">MQTT 双向</text>
+  <text class="edge-label" x="358" y="130" text-anchor="start">WiFi / MQTT 双向</text>
+
+  <!-- ═══ MCU Row ═══ -->
+  <!-- Qt6 APP -->
+  <g>
+    <rect x="36" y="170" rx="8" width="158" height="56" stroke="#185FA5" stroke-width="0.5" fill="#E6F1FB"/>
+    <text class="t" x="115" y="192" text-anchor="middle" dominant-baseline="central" fill="#0C447C">Qt6 移动应用</text>
+    <text class="ts" x="115" y="212" text-anchor="middle" dominant-baseline="central">Android APP</text>
+  </g>
+
+  <!-- Host MCU -->
+  <g>
+    <rect x="248" y="170" rx="8" width="184" height="56" stroke="#0F6E56" stroke-width="0.5" fill="#E1F5EE"/>
+    <text class="t" x="340" y="192" text-anchor="middle" dominant-baseline="central" fill="#085041">STM32 主机 MCU</text>
+    <text class="ts" x="340" y="212" text-anchor="middle" dominant-baseline="central">F103C8T6</text>
+  </g>
+
+  <!-- Slave MCU -->
+  <g>
+    <rect x="486" y="170" rx="8" width="158" height="56" stroke="#0F6E56" stroke-width="0.5" fill="#E1F5EE"/>
+    <text class="t" x="565" y="192" text-anchor="middle" dominant-baseline="central" fill="#085041">STM32 从机 MCU</text>
+    <text class="ts" x="565" y="212" text-anchor="middle" dominant-baseline="central">F103C8T6</text>
+  </g>
+
+  <!-- UART1 between Host and Slave -->
+  <line x1="432" y1="198" x2="486" y2="198" class="arr-both"/>
+  <text class="edge-label" x="459" y="193" text-anchor="middle">UART1</text>
+
+  <!-- ═══ Dotted connectors from MCU to submodules ═══ -->
+  <!-- Host: two columns, x=290 and x=382 -->
+  <line x1="290" y1="226" x2="290" y2="276" class="conn"/>
+  <line x1="382" y1="226" x2="382" y2="276" class="conn"/>
+  <!-- Slave: three columns -->
+  <line x1="524" y1="226" x2="524" y2="276" class="conn"/>
+  <line x1="565" y1="226" x2="565" y2="276" class="conn"/>
+  <line x1="608" y1="226" x2="608" y2="276" class="conn"/>
+
+  <!-- ═══ Row 1: y=280 ═══ -->
+  <!-- Host: K230 + 扫码枪 -->
+  <g><rect x="248" y="280" rx="6" width="84" height="42" class="sub"/><text class="t" x="290" y="296" text-anchor="middle" dominant-baseline="central">K230</text><text class="ts" x="290" y="312" text-anchor="middle" dominant-baseline="central">人脸识别</text></g>
+  <g><rect x="340" y="280" rx="6" width="84" height="42" class="sub"/><text class="t" x="382" y="296" text-anchor="middle" dominant-baseline="central">扫码枪</text><text class="ts" x="382" y="312" text-anchor="middle" dominant-baseline="central">条码输入</text></g>
+
+  <!-- Slave: MAX30102 (full width) -->
+  <g><rect x="486" y="280" rx="6" width="158" height="42" class="sub"/><text class="t" x="565" y="296" text-anchor="middle" dominant-baseline="central">MAX30102</text><text class="ts" x="565" y="312" text-anchor="middle" dominant-baseline="central">心率 · 血氧</text></g>
+
+  <!-- Row 1 protocol labels -->
+  <text class="tag" x="290" y="338" text-anchor="middle">UART3</text>
+  <text class="tag" x="382" y="338" text-anchor="middle">UART2</text>
+  <text class="tag" x="565" y="338" text-anchor="middle">I²C</text>
+
+  <!-- ═══ Row 2: y=350 ═══ -->
+  <!-- Dotted connectors extending down -->
+  <line x1="290" y1="322" x2="290" y2="348" class="conn"/>
+  <line x1="382" y1="322" x2="382" y2="348" class="conn"/>
+  <line x1="524" y1="322" x2="524" y2="348" class="conn"/>
+  <line x1="608" y1="322" x2="608" y2="348" class="conn"/>
+
+  <!-- Host: ESP8266 + 继电器 -->
+  <g><rect x="248" y="350" rx="6" width="84" height="42" class="sub"/><text class="t" x="290" y="366" text-anchor="middle" dominant-baseline="central">ESP8266</text><text class="ts" x="290" y="382" text-anchor="middle" dominant-baseline="central">WiFi 模块</text></g>
+  <g><rect x="340" y="350" rx="6" width="84" height="42" class="sub"/><text class="t" x="382" y="366" text-anchor="middle" dominant-baseline="central">继电器</text><text class="ts" x="382" y="382" text-anchor="middle" dominant-baseline="central">药柜锁控</text></g>
+
+  <!-- Slave: ASR + TTS -->
+  <g><rect x="486" y="350" rx="6" width="76" height="42" class="sub"/><text class="t" x="524" y="366" text-anchor="middle" dominant-baseline="central">ASR 语音</text><text class="ts" x="524" y="382" text-anchor="middle" dominant-baseline="central">命令识别</text></g>
+  <g><rect x="573" y="350" rx="6" width="71" height="42" class="sub"/><text class="t" x="608" y="366" text-anchor="middle" dominant-baseline="central">TTS</text><text class="ts" x="608" y="382" text-anchor="middle" dominant-baseline="central">语音合成</text></g>
+
+  <!-- Row 2 protocol labels -->
+  <text class="tag" x="290" y="408" text-anchor="middle">UART2 复用</text>
+  <text class="tag" x="382" y="408" text-anchor="middle">GPIO</text>
+  <text class="tag" x="524" y="408" text-anchor="middle">UART3</text>
+  <text class="tag" x="608" y="408" text-anchor="middle">UART2</text>
+
+  <!-- ═══ Row 3: y=420 ═══ -->
+  <!-- Dotted connectors extending down -->
+  <line x1="290" y1="392" x2="290" y2="418" class="conn"/>
+  <line x1="382" y1="392" x2="382" y2="418" class="conn"/>
+
+  <!-- Host: WS2812 + 超声波/光敏 -->
+  <g><rect x="248" y="420" rx="6" width="84" height="42" class="sub"/><text class="t" x="290" y="436" text-anchor="middle" dominant-baseline="central">WS2812</text><text class="ts" x="290" y="452" text-anchor="middle" dominant-baseline="central">RGB 灯带</text></g>
+  <g><rect x="340" y="420" rx="6" width="84" height="42" class="sub"/><text class="t" x="382" y="436" text-anchor="middle" dominant-baseline="central">超声波 / 光敏</text><text class="ts" x="382" y="452" text-anchor="middle" dominant-baseline="central">环境感知</text></g>
+
+  <!-- Row 3 protocol labels -->
+  <text class="tag" x="290" y="478" text-anchor="middle">GPIO</text>
+  <text class="tag" x="382" y="478" text-anchor="middle">GPIO / ADC</text>
+
+  <!-- ═══ Legend ═══ -->
+  <g transform="translate(526, 12)">
+    <rect x="0" y="0" rx="3" width="9" height="9" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text class="ts" x="13" y="8" dominant-baseline="central">云端</text>
+    <rect x="48" y="0" rx="3" width="9" height="9" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text class="ts" x="61" y="8" dominant-baseline="central">应用端</text>
+    <rect x="96" y="0" rx="3" width="9" height="9" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text class="ts" x="109" y="8" dominant-baseline="central">MCU 端</text>
+  </g>
+</svg>
